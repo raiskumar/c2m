@@ -18,5 +18,5 @@ var clusterCmd = &cobra.Command{
 
 func cluster(cmd *cobra.Command, args []string) {
 	fmt.Println(" inside runCluster method")
-	//fmt.Println(strings.Join(args, ""))
+	fmt.Println(args)
 }
