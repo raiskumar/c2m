@@ -41,3 +41,8 @@ https://dzone.com/articles/monitoring-couchbase-cluster
 https://www.slideshare.net/Couchbase/best-practices-troubleshooting-your-couchbase-application-couchbase-connect-2015
 ----
 
+
+
+----References:
+https://github.com/olekukonko/tablewriter
+
