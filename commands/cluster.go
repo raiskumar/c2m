@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/olekukonko/tablewriter"
 	"github.com/raiskumar/c2m/vo"
 	"github.com/spf13/cobra"
 )
@@ -26,14 +27,16 @@ func cluster(cmd *cobra.Command, args []string) {
 	fmt.Println(args)
 	resp := parseResponse()
 	nodesDetails := getAllNodesDetails(resp)
-	for i, val := range nodesDetails {
-		if i == 0 {
-			//fmt.Println(val.GetHeader())
-			//fmt.Printf("%T\n", val)
-		}
-		//fmt.Printf(val.ToString())
-		fmt.Printf("%#v", val)
+
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader([]string{"URL", "Services", "Status", "# Document", "# Hits"})
+
+	for _, val := range nodesDetails {
+
+		table.Append(val.ToString())
 	}
+	table.Render()
+
 }
 
 func parseResponse() vo.PoolResp {
