@@ -5,6 +5,8 @@ $go install github.com/raiskumar/c2m
 
 To run command
 ./c2m Cluster
+or
+go run main.go node
 
 How to build the project:
 $go build
@@ -43,6 +45,7 @@ https://www.slideshare.net/Couchbase/best-practices-troubleshooting-your-couchba
 
 
 
-----References:
-https://github.com/olekukonko/tablewriter
+----Libraries Used
+Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
+Important Couchbase Urls: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 

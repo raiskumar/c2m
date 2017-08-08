@@ -1,4 +1,4 @@
-package main
+package common
 
 import (
 	"encoding/json"
@@ -11,7 +11,7 @@ import (
 )
 
 // url should be fully formed with port as well (like http://172.17.0.4:8091)
-func GetContent(url, user, pass string) []byte {
+func getContent(url, user, pass string) string {
 	client := &http.Client{}
 
 	/* Authenticate */
@@ -24,8 +24,9 @@ func GetContent(url, user, pass string) []byte {
 
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
+	fmt.Println("get:", string(body))
 
-	return body
+	return string(body)
 }
 
 func test() string {
@@ -80,11 +81,15 @@ func ShowCluster() string {
 }*/
 
 //test
-func mainss() {
-	//ShowCluster()
-	contents := GetContent("http://mocky.io/v2/5986c32d1100009c00fcbe4a", "", "")
-	var obj vo.PoolResp
-	json.Unmarshal(contents, &obj)
-	fmt.Println("uri======", obj.Nodes[0].Uptime)
+func mainssssss() {
+	//getContent("http://mocky.io/v2/5927ca0c1100003e0c6cccf7", "", "")
+	ShowCluster()
+	//jsonStr = ``
+	//jsonStr = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+	//jsonStr = `{"name":{"first":"Janet","last":"Prichard"},"age":47}`
+	//value := gjson.Get(jsonStr, "storageTotals.ram.total")
+	//fmt.Println("value = ", value.String())
 
+	//val, _ := jsonparser.GetString([]byte(jsonStr), "alertsSilenceURL")
+	//fmt.Println("val =", val)
 }

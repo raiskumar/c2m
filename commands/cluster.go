@@ -32,7 +32,6 @@ func cluster(cmd *cobra.Command, args []string) {
 	table.SetHeader([]string{"URL", "Services", "Status", "# Document", "# Hits"})
 
 	for _, val := range nodesDetails {
-
 		table.Append(val.ToString())
 	}
 	table.Render()

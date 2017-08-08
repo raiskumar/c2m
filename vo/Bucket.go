@@ -1,10 +1,11 @@
 package vo
 
-import "fmt"
+type Bucket struct {
+	name            string // Name of the bucket, if any
+	numberOfBuckets int
+	bucketsName     string // CSV format
+	numberOfNodes   int
 
-type Node struct {
-	HostName      string
-	Url           string
 	Status        string //healthy, ..
 	DocumentCount int    // read from curr_items or curr_items_tot
 	MemoryFree    int64
@@ -14,6 +15,7 @@ type Node struct {
 	GetHits       int    // Number of get hits on the node
 }
 
+/*
 func (this Node) GetHeaders() []string {
 	return []string{"URL", "Services", "Status", "# Document", "# Hits"}
 }
@@ -26,3 +28,4 @@ func (this Node) ToString() []string {
 		fmt.Sprintf("%s", this.Status), fmt.Sprintf("%d", this.DocumentCount),
 		fmt.Sprintf("%d", this.GetHits)}
 }
+*/
