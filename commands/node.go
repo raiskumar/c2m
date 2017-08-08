@@ -22,6 +22,7 @@ var nodeCmd = &cobra.Command{
 }
 
 // Node command
+// http://<ip>:8091/pools/default gives an insight into computing resources consumed per node
 func node(cmd *cobra.Command, args []string) {
 	fmt.Println("URI=", os.Getenv("URI"))
 
@@ -30,7 +31,6 @@ func node(cmd *cobra.Command, args []string) {
 
 		fmt.Printf("[%d] %s : %v\n", index, name[0], name[1])
 	}*/
-
 	contents := GetContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
 	var obj vo.PoolResp
 	json.Unmarshal(contents, &obj)
@@ -52,20 +52,17 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 	len := len(resp.Nodes)
 	var nodes []vo.Node
 	for i := 0; i < len; i++ {
-		var servicesAsCsv string
-		for _, v := range resp.Nodes[i].Services {
-			servicesAsCsv = v + "," + servicesAsCsv
-		}
 		n := vo.Node{
-			HostName:      resp.Nodes[i].Hostname,
-			Url:           resp.Nodes[i].CouchAPIBase,
-			Status:        resp.Nodes[i].Status,
-			Services:      servicesAsCsv,
-			GetHits:       resp.Nodes[i].InterestingStats.GetHits,
-			DocumentCount: resp.Nodes[i].InterestingStats.CurrItems,
-			MemoryTotal:   resp.Nodes[i].SystemStats.MemTotal,
-			MemoryUsed:    resp.Nodes[i].InterestingStats.MemUsed,
-			MemoryFree:    resp.Nodes[i].SystemStats.MemFree}
+			HostName:          resp.Nodes[i].Hostname,
+			Url:               resp.Nodes[i].CouchAPIBase,
+			Status:            resp.Nodes[i].Status,
+			Services:          resp.Nodes[i].Services,
+			GetHits:           resp.Nodes[i].InterestingStats.GetHits,
+			DocumentCount:     resp.Nodes[i].InterestingStats.CurrItems,
+			MemoryTotal:       resp.Nodes[i].SystemStats.MemTotal,
+			MemoryUsed:        resp.Nodes[i].InterestingStats.MemUsed,
+			MemoryFree:        resp.Nodes[i].SystemStats.MemFree,
+			ClusterMembership: resp.Nodes[i].ClusterMembership}
 		nodes = append(nodes, n)
 	}
 	return nodes

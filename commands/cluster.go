@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/olekukonko/tablewriter"
 	"github.com/raiskumar/c2m/vo"
 	"github.com/spf13/cobra"
 )
@@ -22,10 +21,13 @@ var clusterCmd = &cobra.Command{
 	Run: cluster,
 }
 
+// base_url/pools/default/buckets
 func cluster(cmd *cobra.Command, args []string) {
-	fmt.Println(" inside runCluster method")
-	fmt.Println(args)
-	resp := parseResponse()
+	contents := GetContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
+
+	fmt.Println(contents)
+
+	/*resp := parseResponse()
 	nodesDetails := getAllNodesDetails(resp)
 
 	table := tablewriter.NewWriter(os.Stdout)
@@ -34,7 +36,7 @@ func cluster(cmd *cobra.Command, args []string) {
 	for _, val := range nodesDetails {
 		table.Append(val.ToString())
 	}
-	table.Render()
+	table.Render()*/
 
 }
 
@@ -71,7 +73,7 @@ func getAllNodesDetails(resp vo.PoolResp) []vo.Node {
 			HostName:      resp.Nodes[i].Hostname,
 			Url:           resp.Nodes[i].CouchAPIBase,
 			Status:        resp.Nodes[i].Status,
-			Services:      servicesAsCsv,
+			Services:      resp.Nodes[i].Services,
 			GetHits:       resp.Nodes[i].InterestingStats.GetHits,
 			DocumentCount: resp.Nodes[i].InterestingStats.CurrItems,
 			MemoryTotal:   resp.Nodes[i].SystemStats.MemTotal,

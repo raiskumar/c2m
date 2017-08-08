@@ -1,4 +1,5 @@
-ouchbase Cluster Manager
+Couchbase Cluster Manager   --- a component exists with this name
+Couchbase Cluster Monitor    ??
 
 To Create Executable
 $go install github.com/raiskumar/c2m
