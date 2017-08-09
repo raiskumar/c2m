@@ -11,7 +11,7 @@ $go build
 ## Run Commands
 ### 1. Configure the cluster by passing ip address, user id and password
 `$./c2m config
-$ go run main.go node`
+ $ go run main.go node`
 
 ### 2. Get Node details of the cluster
 $./c2m node

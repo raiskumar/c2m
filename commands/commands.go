@@ -25,4 +25,5 @@ func init() {
 	CcbCmd.AddCommand(clusterCmd)
 	CcbCmd.AddCommand(nodeCmd)
 	CcbCmd.AddCommand(configCmd)
+	CcbCmd.AddCommand(bucketCmd)
 }

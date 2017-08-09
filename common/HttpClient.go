@@ -11,7 +11,7 @@ import (
 )
 
 // url should be fully formed with port as well (like http://172.17.0.4:8091)
-func getContent(url, user, pass string) string {
+func Get(url, user, pass string) string {
 	client := &http.Client{}
 
 	/* Authenticate */

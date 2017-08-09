@@ -59,9 +59,10 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 			Services:          resp.Nodes[i].Services,
 			GetHits:           resp.Nodes[i].InterestingStats.GetHits,
 			DocumentCount:     resp.Nodes[i].InterestingStats.CurrItems,
-			MemoryTotal:       resp.Nodes[i].SystemStats.MemTotal,
-			MemoryUsed:        resp.Nodes[i].InterestingStats.MemUsed,
-			MemoryFree:        resp.Nodes[i].SystemStats.MemFree,
+			DiskUsedByData:    resp.Nodes[i].InterestingStats.CouchDocsActualDiskSize, // couch_docs_actual_disk_size
+			RAMUsed:           resp.Nodes[i].InterestingStats.MemUsed,                 // interestingstats.mem_used
+			FreeRAM:           resp.Nodes[i].MemoryFree,
+			TotalRAM:          resp.Nodes[i].MemoryTotal,
 			ClusterMembership: resp.Nodes[i].ClusterMembership}
 		nodes = append(nodes, n)
 	}
