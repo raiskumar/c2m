@@ -3,13 +3,15 @@ Go based utility to monitor your couchbase cluster.
 
 ## Create Executable / Build Project
 $go install github.com/raiskumar/c2m
+
 or
+
 $go build
 
 ## Run Commands
 ### 1. Configure the cluster by passing ip address, user id and password
-$./c2m config
-$ go run main.go node
+`$./c2m config
+$ go run main.go node`
 
 ### 2. Get Node details of the cluster
 $./c2m node
