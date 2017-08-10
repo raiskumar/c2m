@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/olekukonko/tablewriter"
+	"github.com/raiskumar/c2m/common"
 	"github.com/raiskumar/c2m/vo"
 	"github.com/spf13/cobra"
 )
@@ -31,7 +32,7 @@ func node(cmd *cobra.Command, args []string) {
 
 		fmt.Printf("[%d] %s : %v\n", index, name[0], name[1])
 	}*/
-	contents := GetContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
+	contents := common.GetRestContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
 	var obj vo.PoolResp
 	json.Unmarshal(contents, &obj)
 

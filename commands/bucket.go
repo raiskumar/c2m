@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/olekukonko/tablewriter"
+	"github.com/raiskumar/c2m/common"
 	"github.com/raiskumar/c2m/vo"
 	"github.com/spf13/cobra"
 )
@@ -16,33 +17,32 @@ var bucketCmd = &cobra.Command{
 	Short: "Prints important details/metadata about the buckets stored in couchbase cluster",
 	Long: `Command which prints the bucket related details 
             Command format
-			$./c2m bucket --ip={val}    # for a specific node
+			$./c2m bucket {optional_bucket_name}
             `,
 	Run: bucket,
 }
 
-// Node command
-// http://<ip>:8091/pools/default/buckets gives an insight into computing resources consumed per node
+// bucket command
+// http://<ip>:8091/pools/default/buckets gives bucket and node details
 func bucket(cmd *cobra.Command, args []string) {
-	fmt.Println(os.Getenv("URI") + " " + os.Getenv("USER") + " " + os.Getenv("PASS"))
-	uri := os.Getenv("URI") + "/pools/default/buckets"
-	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf"
+	if len(NodeURL) == 0 {
+		fmt.Println(SetupMsg)
+		os.Exit(1)
+	}
+	var bucketName string
+	if len(args) > 0 {
+		bucketName = args[0]
+	}
+	uri := NodeURL + "/pools/default/buckets"
+	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
-	contents := GetContent(uri, os.Getenv("USER"), os.Getenv("PASS"))
+	contents := common.GetRestContent(uri, UserID, Password)
 
 	var obj vo.BucketResp
 	json.Unmarshal(contents, &obj)
 
 	buckets := getBucketDetails(obj)
-
-	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader(buckets[0].GetHeaders())
-
-	for _, val := range buckets {
-		table.Append(val.ToString())
-	}
-	table.Render()
-
+	printBucketCommandOutput(buckets, bucketName)
 }
 
 // Parse REST response and return the list of nodes struct
@@ -62,4 +62,19 @@ func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
 		buckets = append(buckets, buckt)
 	}
 	return buckets
+}
+
+func printBucketCommandOutput(buckets []vo.Bucket, bucketName string) {
+	fmt.Println(" verbose =", Verbose)
+	table := tablewriter.NewWriter(os.Stdout)
+	table.SetHeader(buckets[0].GetHeaders())
+
+	for _, val := range buckets {
+		if len(bucketName) == 0 {
+			table.Append(val.ToString())
+		} else if val.Name == bucketName {
+			table.Append(val.ToString())
+		}
+	}
+	table.Render()
 }

@@ -9,6 +9,9 @@ or
 $go build
 
 ## Run Commands
+### To get help of any command
+$./c2m command --help
+
 ### 1. Configure the cluster by passing ip address, user id and password
 `$./c2m config
  $ go run main.go node`
@@ -50,4 +53,5 @@ https://www.slideshare.net/Couchbase/best-practices-troubleshooting-your-couchba
 ----Libraries Used
 Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
 Important Couchbase Urls: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
+CLI support: https://github.com/spf13/cobra
 
