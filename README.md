@@ -13,9 +13,7 @@ CLI application needs to know certain basic details before it starts spitting cl
 <br />
 <br/> $./c2m config http://172.27.0.1:8091 Administrator Password123
 <br />
-<br/> If you haven't configured User credentials during the Couchbase setup then use below command
-<br/> $./c2m config http://172.27.0.1:8091
-<br />
+<br/> If you haven't configured User credentials during the Couchbase setup then don't pass those details in above command.
 <br /> Note: The application doesn't store the credentials in clear text!
 
 ## Supported Commands
