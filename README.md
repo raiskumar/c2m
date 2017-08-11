@@ -20,11 +20,13 @@ CLI application needs to know certain basic details before it starts spitting cl
 $./c2m node
 <br/> Gets the node related details of the couchbaase cluster
 
-$./c2m bucket
+$./c2m bucket {optional_bucket_name}
 <br/> Prints bucket related details of the cluster
 
 $./c2m cluster
 <br/> Prints cluster metadata
+
+<br/> Above commands can also respond appropriately on usage of --verbose flag. 
 
 ## Get Help about any Command
 To get help of any command
