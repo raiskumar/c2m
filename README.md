@@ -1,18 +1,16 @@
 ## c2m - Couchbase Cluster Monitor
-Go based utility to monitor your couchbase cluster. 
+A CLI utility to monitor Couchbase cluster.
 
 ## Create Executable / Build Project
 $go install github.com/raiskumar/c2m
-
-or
-
-$go build
+<br/> or
+<br/> $go build
 
 ## Run Commands
-### To get help of any command
+#### To get help of any command
 $./c2m command --help
 
-### 1. Configure the cluster by passing ip address, user id and password
+#### 1. Configure the cluster by passing ip address, user id and password
 `$./c2m config
  $ go run main.go node`
 
