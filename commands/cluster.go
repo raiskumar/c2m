@@ -22,7 +22,10 @@ var clusterCmd = &cobra.Command{
 
 // base_url/pools/default/buckets
 func cluster(cmd *cobra.Command, args []string) {
-	contents := common.GetRestContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
+	uri := NodeURL + "/pools/default"
+	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
+
+	contents := common.GetRestContent(uri, UserID, Password)
 
 	var obj vo.PoolResp
 	json.Unmarshal(contents, &obj)

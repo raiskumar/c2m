@@ -2,7 +2,6 @@ package commands
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/olekukonko/tablewriter"
@@ -25,14 +24,10 @@ var nodeCmd = &cobra.Command{
 // Node command
 // http://<ip>:8091/pools/default gives an insight into computing resources consumed per node
 func node(cmd *cobra.Command, args []string) {
-	fmt.Println("URI=", os.Getenv("URI"))
+	uri := NodeURL + "/pools/default"
+	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
 
-	/*for index, value := range os.Environ() {
-		name := strings.Split(value, "=") // split by = sign
-
-		fmt.Printf("[%d] %s : %v\n", index, name[0], name[1])
-	}*/
-	contents := common.GetRestContent(os.Getenv("URI"), os.Getenv("USER"), os.Getenv("PASS"))
+	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp
 	json.Unmarshal(contents, &obj)
 
