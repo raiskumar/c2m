@@ -9,8 +9,7 @@ $go install github.com/raiskumar/c2m
 ## Bootstrap CLI application
 CLI application needs to know certain basic details before it starts spitting cluster insights. Your cluster might have 100s of nodes, does it mean you need to provide details of all nodes ? Certenly NOT!
 <br />
-<br /> You just need to provide base URL of any one node.
-<br /> Also you need to provide user credentials to access that node.
+<br /> You just need to provide base URL of any one node and credentials to access it (if configured)!
 <br />
 <br/> $./c2m config http://172.27.0.1:8091 Administrator Password123
 <br />
@@ -33,7 +32,7 @@ To get help of any command
 
 
 
-###------
+### ------ 
 
 ------https://forums.couchbase.com/t/monitoring-alerts-through-api-or-cli/893
 The health check of the whole cluster can be gotten by doing a curl against http://(ip_address):8091/pools/default/ ... remember to pass username and password.
