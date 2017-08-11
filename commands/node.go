@@ -59,7 +59,8 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 			RAMUsed:           resp.Nodes[i].InterestingStats.MemUsed,                 // interestingstats.mem_used
 			FreeRAM:           resp.Nodes[i].MemoryFree,
 			TotalRAM:          resp.Nodes[i].MemoryTotal,
-			ClusterMembership: resp.Nodes[i].ClusterMembership}
+			ClusterMembership: resp.Nodes[i].ClusterMembership,
+			CacheMisses:       resp.Nodes[i].InterestingStats.EpBgFetched}
 		nodes = append(nodes, n)
 	}
 	return nodes

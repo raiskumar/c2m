@@ -11,9 +11,10 @@ type Cluster struct {
 	FreeDisk       int64 // hdd.free
 	TotalDisk      int64 //hdd.total
 
-	RAMUsedByData int   //ram.usedByData : total RAM configured for data buckets
-	TotalRAM      int64 // ram.total     : total RAM or memory configured for all servers within the cluster
-	UsedRAM       int64 // ram.used
+	RAMUsedByData  int   //ram.usedByData : total RAM configured for data buckets
+	TotalRAM       int64 // ram.total     : total RAM or memory configured for all servers within the cluster
+	UsedRAM        int64 // ram.used
+	evictionPolicy string
 }
 
 //Active Servers	The number of active servers within the current cluster configuration.
@@ -22,7 +23,7 @@ type Cluster struct {
 //Servers Pending Rebalance	The number of servers that are currently waiting to be rebalanced after joining a cluster or being reactivated after failover.
 
 func (this Cluster) GetHeaders() []string {
-	return []string{"Name", "Node -> Membership Status", "RAM Total", "DATA RAM", "Used RAM", "Total Disk", "DATA DISK", "FREE DISK"}
+	return []string{"Name", "Node -> Membership Status", "RAM Total", "DATA RAM", "Used RAM", "Total Disk", "DATA DISK", "FREE DISK", "Eviction Policy"}
 }
 
 func (this Cluster) ToString() []string {
@@ -38,5 +39,6 @@ func (this Cluster) ToString() []string {
 		fmt.Sprintf("%d", this.UsedRAM),
 		fmt.Sprintf("%d", this.TotalDisk),
 		fmt.Sprintf("%d", this.DiskUsedByData),
-		fmt.Sprintf("%d", this.FreeDisk)}
+		fmt.Sprintf("%d", this.FreeDisk),
+		fmt.Sprintf("%s", this.evictionPolicy)}
 }

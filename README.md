@@ -57,8 +57,9 @@ https://www.slideshare.net/Couchbase/best-practices-troubleshooting-your-couchba
 
 
 
-----Libraries Used
+### Libraries/References Used
 Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
 Important Couchbase Urls: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 CLI support: https://github.com/spf13/cobra
+Monitoring Couchbase: https://blog.couchbase.com/monitoring-couchbase-cluster/
 

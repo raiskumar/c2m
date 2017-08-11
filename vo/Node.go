@@ -20,10 +20,12 @@ type Node struct {
 	//active - Nodes are participating in the cluster.
 	//inactiveFailed - meaning that the node has failed, and administrator intervention is needed. Critical event.
 	ClusterMembership string // Returns state of the node in the cluster
+
+	CacheMisses int //ep_bg_fetched
 }
 
 func (this Node) GetHeaders() []string {
-	return []string{"URL", "Services", "Status", "# Document", "# Hits", "Cluster Membership", "Free RAM", "Total RAM", "RAM used", "Disk Used By Data"}
+	return []string{"URL", "Services", "Status", "# Document", "# Hits", "Cluster Membership", "Free RAM", "Total RAM", "RAM used", "Disk Used By Data", "Cache Misses"}
 }
 
 // Returns the string representation of the Node as an array
@@ -39,7 +41,8 @@ func (this Node) ToString() []string {
 		fmt.Sprintf("%d", this.FreeRAM),
 		fmt.Sprintf("%d", this.TotalRAM),
 		fmt.Sprintf("%d", this.RAMUsed),
-		fmt.Sprintf("%d", this.DiskUsedByData)}
+		fmt.Sprintf("%d", this.DiskUsedByData),
+		fmt.Sprintf("%d", this.CacheMisses)}
 }
 
 //Active if 'clusterMemebrship' === 'active'

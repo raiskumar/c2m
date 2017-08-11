@@ -9,7 +9,7 @@ type Bucket struct {
 	DiskFetches    int    // Disk fetches  ; //Indicates how frequently Couchbase Server is reaching to disk to retrieve information instead of using the information stored in RAM.
 	ItemCount      int
 	ReplicaNumber  int
-	EvictionPolicy string // "valueOnly"
+	EvictionPolicy string // "valueOnly" - evict value only from RAM if required
 }
 
 //Get bucket stat for a node
@@ -17,7 +17,7 @@ type Bucket struct {
 // above api can even tell what all documents id are there at the node
 
 func (this Bucket) GetHeaders() []string {
-	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "OPS"}
+	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "OPS", "Eviction Policy"}
 }
 
 // Returns the string representation of the bucket as an array
@@ -28,5 +28,6 @@ func (this Bucket) ToString() []string {
 		fmt.Sprintf("%d", this.ItemCount),
 		fmt.Sprintf("%d", this.ReplicaNumber),
 		fmt.Sprintf("%d", this.DiskFetches),
-		fmt.Sprintf("%d", this.Ops)}
+		fmt.Sprintf("%d", this.Ops),
+		fmt.Sprintf("%s", this.EvictionPolicy)}
 }
