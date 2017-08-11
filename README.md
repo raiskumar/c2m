@@ -26,7 +26,8 @@ $./c2m bucket {optional_bucket_name}
 $./c2m cluster
 <br/> Prints cluster metadata
 
-<br/> Above commands can also respond appropriately on usage of --verbose flag. 
+Above commands can also respond appropriately on usage of --verbose flag. 
+<br/> $./c2m bucket {bucket_name} --verbose
 
 ## Get Help about any Command
 To get help of any command
