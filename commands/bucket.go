@@ -25,10 +25,7 @@ var bucketCmd = &cobra.Command{
 // bucket command
 // http://<ip>:8091/pools/default/buckets gives bucket and node details
 func bucket(cmd *cobra.Command, args []string) {
-	if len(NodeURL) == 0 {
-		fmt.Println(SetupMsg)
-		os.Exit(1)
-	}
+	common.ValidateCommand(NodeURL)
 	var bucketName string
 	if len(args) > 0 {
 		bucketName = args[0]

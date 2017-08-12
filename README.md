@@ -36,9 +36,8 @@ To get help of any command
 
 ## Libraries/References Used
 Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
-<br />Important Couchbase Urls: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
+<br />Important Couchbase REST End points: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 <br />CLI support: https://github.com/spf13/cobra
 <br />Monitoring Couchbase: https://blog.couchbase.com/monitoring-couchbase-cluster/ & https://dzone.com/articles/monitoring-couchbase-cluster
-<br />Important REST end points: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 <br />Troubleshooting Issues: https://www.slideshare.net/Couchbase/experience-at-global-scale-powered-by-couchbase-mobile-couchbase-connect-2015?next_slideshow=1
 

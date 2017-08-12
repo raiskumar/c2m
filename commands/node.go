@@ -24,6 +24,7 @@ var nodeCmd = &cobra.Command{
 // Node command
 // http://<ip>:8091/pools/default gives an insight into computing resources consumed per node
 func node(cmd *cobra.Command, args []string) {
+	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
 	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
 
