@@ -1,5 +1,5 @@
 ## c2m - Couchbase Cluster Monitor
-A CLI utility to monitor Couchbase cluster. This application can help you get key insights about your Couchbase Cluster. These details can help you to proactively monitor your cluster and take appropriate step. 
+A CLI utility to monitor Couchbase cluster. Tool helps you get key insights about your Couchbase Cluster. These details can help you to proactively monitor your cluster and take appropriate step. 
 
 ## Create Executable / Build Project
 $go install github.com/raiskumar/c2m
