@@ -7,23 +7,22 @@ $go install github.com/raiskumar/c2m
 <br/> $go build
 
 ## Bootstrap CLI application
-CLI application needs to know certain basic details before it starts spitting cluster insights. Your cluster might have 100s of nodes, does it mean you need to provide details of all nodes ? Certenly NOT!
+CLI application needs to know certain basic details before it starts spitting cluster insights. Your cluster might have 100s of nodes, <b>does it mean you need to provide details of all nodes ? Certenly NOT!</b>
 <br />
 <br /> You just need to provide base URL of any one node and credentials to access it (if configured)!
 <br />
 <br/> $./c2m config http://172.27.0.1:8091 Administrator Password123
 <br />
-<br/> If you haven't configured User credentials during the Couchbase setup then don't pass those details in above command.
-<br /> Note: The application doesn't store the credentials in clear text!
+<br /> <b>Note:</b> The application doesn't store the credentials in clear text!
 
 ## Supported Commands
-$./c2m node
+<b>$./c2m node</b>
 <br/> Gets the node related details of the couchbaase cluster
 
-$./c2m bucket {optional_bucket_name}
+<b>$./c2m bucket {optional_bucket_name}</b>
 <br/> Prints bucket related details of the cluster
 
-$./c2m cluster
+<b>$./c2m cluster</b>
 <br/> Prints cluster metadata
 
 Above commands can also respond appropriately on usage of --verbose flag. 
