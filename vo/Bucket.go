@@ -18,7 +18,7 @@ type Bucket struct {
 // above api can even tell what all documents id are there at the node
 
 func (this Bucket) GetHeaders() []string {
-	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "OPS", "Eviction Policy", "# VBuckets"}
+	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "Operation/Sec", "Eviction Policy", "# VBuckets"}
 }
 
 // Returns the string representation of the bucket as an array

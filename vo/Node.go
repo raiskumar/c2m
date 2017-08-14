@@ -33,7 +33,7 @@ type Node struct {
 }
 
 func (this Node) GetHeaders() []string {
-	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Document", "# Hits", "Cache Misses", "CPU Utiliztion",
+	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Item", "# Hits", "Cache Misses", "CPU Utiliztion",
 		"Free RAM", "Total RAM", "RAM used", "Disk Used By Data"}
 }
 

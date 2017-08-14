@@ -2,7 +2,6 @@ package commands
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/olekukonko/tablewriter"
@@ -70,7 +69,7 @@ func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
 }
 
 func printBucketCommandOutput(buckets []vo.Bucket, bucketName string) {
-	fmt.Println(" verbose =", Verbose)
+	//fmt.Println(" verbose =", Verbose)
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader(buckets[0].GetHeaders())
 
