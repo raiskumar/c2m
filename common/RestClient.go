@@ -12,7 +12,7 @@ import (
 
 // Make REST call and read response
 func GetRestContent(url, user, pass string) []byte {
-	fmt.Println("URL=", url)
+	//fmt.Println("URL=", url)
 	client := &http.Client{}
 
 	/* Authenticate */
