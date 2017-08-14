@@ -1,6 +1,9 @@
 package vo
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // https://developer.couchbase.com/documentation/server/4.5/admin/ui-intro.html
 type Node struct {
@@ -26,11 +29,12 @@ type Node struct {
 	//https://developer.couchbase.com/documentation/server/4.5/monitoring/monitoring-rest.html
 	CPUUtilizationRate float64
 	SwapUsed           int
-	FreeMemory         int
+	FreeMemory         int64
 }
 
 func (this Node) GetHeaders() []string {
-	return []string{"URL", "Services", "Status", "# Document", "# Hits", "Cluster Membership", "Free RAM", "Total RAM", "RAM used", "Disk Used By Data", "Cache Misses"}
+	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Document", "# Hits", "Cache Misses", "CPU Utiliztion",
+		"Free RAM", "Total RAM", "RAM used", "Disk Used By Data"}
 }
 
 // Returns the string representation of the Node as an array
@@ -38,16 +42,17 @@ func (this Node) GetHeaders() []string {
 func (this Node) ToString() []string {
 	return []string{
 		fmt.Sprintf("%s", this.HostName),
-		fmt.Sprintf("%v", this.Services),
+		fmt.Sprintf("%s", strings.Join(this.Services[:], ",")), // convert array into CSV
 		fmt.Sprintf("%s", this.Status),
+		fmt.Sprintf("%s", this.ClusterMembership),
 		fmt.Sprintf("%d", this.DocumentCount),
 		fmt.Sprintf("%d", this.GetHits),
-		fmt.Sprintf("%s", this.ClusterMembership),
+		fmt.Sprintf("%d", this.CacheMisses),
+		fmt.Sprintf("%f", this.CPUUtilizationRate),
 		fmt.Sprintf("%d", this.FreeRAM),
 		fmt.Sprintf("%d", this.TotalRAM),
 		fmt.Sprintf("%d", this.RAMUsed),
-		fmt.Sprintf("%d", this.DiskUsedByData),
-		fmt.Sprintf("%d", this.CacheMisses)}
+		fmt.Sprintf("%d", this.DiskUsedByData)}
 }
 
 //Active if 'clusterMemebrship' === 'active'
