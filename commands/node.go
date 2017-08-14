@@ -23,6 +23,7 @@ var nodeCmd = &cobra.Command{
 
 // Node command
 // http://<ip>:8091/pools/default gives an insight into computing resources consumed per node
+// http://<ip>:8091/nodeStatuses // returns status of nodes
 func node(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
@@ -50,18 +51,21 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 	var nodes []vo.Node
 	for i := 0; i < len; i++ {
 		n := vo.Node{
-			HostName:          resp.Nodes[i].Hostname,
-			Url:               resp.Nodes[i].CouchAPIBase,
-			Status:            resp.Nodes[i].Status,
-			Services:          resp.Nodes[i].Services,
-			GetHits:           resp.Nodes[i].InterestingStats.GetHits,
-			DocumentCount:     resp.Nodes[i].InterestingStats.CurrItems,
-			DiskUsedByData:    resp.Nodes[i].InterestingStats.CouchDocsActualDiskSize, // couch_docs_actual_disk_size
-			RAMUsed:           resp.Nodes[i].InterestingStats.MemUsed,                 // interestingstats.mem_used
-			FreeRAM:           resp.Nodes[i].MemoryFree,
-			TotalRAM:          resp.Nodes[i].MemoryTotal,
-			ClusterMembership: resp.Nodes[i].ClusterMembership,
-			CacheMisses:       resp.Nodes[i].InterestingStats.EpBgFetched}
+			HostName:           resp.Nodes[i].Hostname,
+			Url:                resp.Nodes[i].CouchAPIBase,
+			Status:             resp.Nodes[i].Status,
+			Services:           resp.Nodes[i].Services,
+			GetHits:            resp.Nodes[i].InterestingStats.GetHits,
+			DocumentCount:      resp.Nodes[i].InterestingStats.CurrItems,
+			DiskUsedByData:     resp.Nodes[i].InterestingStats.CouchDocsActualDiskSize, // couch_docs_actual_disk_size
+			RAMUsed:            resp.Nodes[i].InterestingStats.MemUsed,                 // interestingstats.mem_used
+			FreeRAM:            resp.Nodes[i].MemoryFree,
+			TotalRAM:           resp.Nodes[i].MemoryTotal,
+			ClusterMembership:  resp.Nodes[i].ClusterMembership,
+			CacheMisses:        resp.Nodes[i].InterestingStats.EpBgFetched,
+			CPUUtilizationRate: resp.Nodes[i].SystemStats.CPUUtilizationRate,
+			SwapUsed:           resp.Nodes[i].SystemStats.SwapUsed,
+			FreeMemory:         resp.Nodes[i].SystemStats.MemFree}
 		nodes = append(nodes, n)
 	}
 	return nodes

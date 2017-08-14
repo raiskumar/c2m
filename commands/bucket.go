@@ -48,6 +48,13 @@ func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
 
 	var buckets []vo.Bucket
 	for i := 0; i < len; i++ {
+		vBucketMap := resp[i].VBucketServerMap.VBucketMap
+
+		count := 0 // count of vBucket
+		for range vBucketMap {
+			count = count + 1
+		}
+
 		buckt := vo.Bucket{
 			Name:           resp[i].Name,
 			BucketType:     resp[i].BucketType,
@@ -55,7 +62,8 @@ func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
 			Ops:            resp[i].BasicStats.OpsPerSec,
 			DiskFetches:    resp[i].BasicStats.DiskFetches,
 			ItemCount:      resp[i].BasicStats.ItemCount,
-			EvictionPolicy: resp[i].EvictionPolicy}
+			EvictionPolicy: resp[i].EvictionPolicy,
+			NumVBuckets:    count}
 		buckets = append(buckets, buckt)
 	}
 	return buckets

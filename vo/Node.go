@@ -20,8 +20,13 @@ type Node struct {
 	//active - Nodes are participating in the cluster.
 	//inactiveFailed - meaning that the node has failed, and administrator intervention is needed. Critical event.
 	ClusterMembership string // Returns state of the node in the cluster
+	CacheMisses       int    //ep_bg_fetched
 
-	CacheMisses int //ep_bg_fetched
+	//If any of the below value shows constrants for any node of the cluster, address it and evaluate if additional nodes are required!
+	//https://developer.couchbase.com/documentation/server/4.5/monitoring/monitoring-rest.html
+	CPUUtilizationRate float64
+	SwapUsed           int
+	FreeMemory         int
 }
 
 func (this Node) GetHeaders() []string {
