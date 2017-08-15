@@ -1,3 +1,4 @@
+[![Build Status](https://secure.travis-ci.org/raiskumar/c2m.png)](http://travis-ci.org/raiskumar/c2m)
 [![Go Report Card](https://goreportcard.com/badge/github.com/raiskumar/c2m)](https://goreportcard.com/report/github.com/raiskumar/c2m)
 [![GoDoc](https://godoc.org/github.com/raiskumar/c2m?status.svg)](https://godoc.org/github.com/raiskumar/c2m)
 
