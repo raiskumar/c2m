@@ -1,6 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/raiskumar/c2m)](https://goreportcard.com/report/github.com/raiskumar/c2m)
 
-## c2m <b>Couchbase Cluster Monitor</b>
+## c2m :<i>Couchbase Cluster Monitor</i>
 
 A CLI utility to monitor Couchbase cluster. Tool helps you get key insights about your Couchbase Cluster. These details can help you to proactively monitor your cluster and take appropriate step. 
 
