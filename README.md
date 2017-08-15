@@ -25,6 +25,9 @@ CLI application needs to know certain basic details before it starts spitting cl
 <b>$./c2m cluster</b>
 <br/> Prints cluster metadata
 
+<b>$./c2m index</b>
+<br/> Prints Index details of the Cluster
+
 Above commands can also respond appropriately on usage of --verbose flag. 
 <br/> $./c2m bucket {bucket_name} --verbose
 

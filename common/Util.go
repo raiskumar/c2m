@@ -7,7 +7,8 @@ import (
 
 func ValidateCommand(NodeURL string) {
 	if len(NodeURL) == 0 {
-		fmt.Println(" Please configure URL of the cluster !")
+		fmt.Println("Please configure Your Cluster !")
+		fmt.Println("Run config command; for help $./c2m config --help")
 		os.Exit(1)
 	}
 }
