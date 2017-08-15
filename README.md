@@ -20,29 +20,29 @@ CLI application needs to know certain basic details before it starts spitting cl
 <br/> $./c2m config http://172.27.0.1:8091 Administrator Password123
 <br />
 <br /> <b>Note:</b> The application doesn't store the credentials in clear text!
-<br /> You should run this CLI from a host/VM which has access to Couchbase nodes/servers
+<br /> You should run this CLI from a host/VM which has access to Couchbase nodes/servers.
 
 ## Supported Commands
-<b>$./c2m node</b>
+<b>$c2m node</b>
 <br/> Gets the node related details of the couchbaase cluster
 
-<b>$./c2m bucket {optional_bucket_name}</b>
+<b>$c2m bucket {optional_bucket_name}</b>
 <br/> Prints bucket related details of the cluster
 
-<b>$./c2m cluster</b>
+<b>$c2m cluster</b>
 <br/> Prints cluster metadata
 
-<b>$./c2m index</b>
+<b>$c2m index</b>
 <br/> Prints Index details of the Cluster
 
 Above commands can also respond appropriately on usage of --verbose flag. 
-<br/> $./c2m bucket {bucket_name} --verbose
+<br/> $c2m bucket {bucket_name} --verbose
 
 ## Get Help about any Command
 To get help of any command
-<br /> <b> $./c2m {command} --help </b>
+<br /> <b> $c2m {command} --help </b>
 <br /> or
-<br /> <b> $./c2m --help</b>
+<br /> <b> $c2m --help</b>
 
 
 ## Libraries/References Used for the Tool
@@ -52,4 +52,3 @@ Print the output on console in tabular format: https://github.com/olekukonko/tab
 <br />Monitoring Couchbase: https://blog.couchbase.com/monitoring-couchbase-cluster/ 
 <br />& https://blog.couchbase.com/top-10-things-ops-sys-admin-must-know-about-couchbase/
 <br />Troubleshooting Issues: https://www.youtube.com/watch?v=88NHDWz52aY
-
