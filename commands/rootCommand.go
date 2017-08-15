@@ -13,8 +13,8 @@ import (
 // RootCmd is the starting point of application
 var RootCmd = &cobra.Command{
 	Use:   "c2m",
-	Short: "c2m is a couchbase cluster manager",
-	Long: ` c2m : Couchbase Cluster Manager
+	Short: "c2m is a Couchbase Cluster Monitoring Toll",
+	Long: ` c2m : Couchbase Cluster Monitor
 Helps in getting key insights of your Couchbase Cluster. 
 Ideal for monitoring and managing all the nodes of your Couchbase cluster
 Complete documentation available at https://github.com/raiskumar/c2m`,

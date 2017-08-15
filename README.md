@@ -33,10 +33,12 @@ Above commands can also respond appropriately on usage of --verbose flag.
 
 ## Get Help about any Command
 To get help of any command
-<br /> $./c2m command --help
+<br /> <b> $./c2m command --help </b>
+<br /> or
+<br /> <b> $./c2m --help</b>
 
 
-## Libraries/References Used
+## Libraries/References Used for the Tool
 Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
 <br />Important Couchbase REST End points: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 <br />CLI support: https://github.com/spf13/cobra
