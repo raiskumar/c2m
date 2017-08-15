@@ -1,3 +1,4 @@
+// Command - bucket
 package commands
 
 import (
@@ -30,7 +31,7 @@ func bucket(cmd *cobra.Command, args []string) {
 		bucketName = args[0]
 	}
 	uri := NodeURL + "/pools/default/buckets"
-	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
+	//uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 
