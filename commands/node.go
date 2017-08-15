@@ -25,9 +25,13 @@ var nodeCmd = &cobra.Command{
 // http://<ip>:8091/pools/default gives an insight into computing resources consumed per node
 // http://<ip>:8091/nodeStatuses // returns status of nodes
 func node(cmd *cobra.Command, args []string) {
+	subCommand := "stats"
+	if len(args) == 0 || args[0] != "stats" {
+		subCommand = ""
+	}
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	//uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
+	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp
@@ -36,10 +40,10 @@ func node(cmd *cobra.Command, args []string) {
 	nodes := getAllNodes(obj)
 
 	table := tablewriter.NewWriter(os.Stdout)
-	table.SetHeader(nodes[0].GetHeaders())
+	table.SetHeader(nodes[0].GetHeaders(subCommand))
 
 	for _, val := range nodes {
-		table.Append(val.ToString())
+		table.Append(val.ToString(subCommand))
 	}
 	table.Render()
 

@@ -34,14 +34,27 @@ type Node struct {
 	Uptime string
 }
 
-func (this Node) GetHeaders() []string {
-	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Item", "# Hits", "Cache Misses", "CPU Utiliztion",
-		"Free RAM", "Total RAM", "RAM used", "Disk Used By Data", "Up For(sec)"}
+func (this Node) GetHeaders(subCommand string) []string {
+	if subCommand == "stats" {
+		return []string{"Host", "# Item", "CPU Utiliztion", "Free RAM", "Total RAM", "RAM used", "Disk Used By Data", "Up For(sec)"}
+	}
+	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Item", "# Hits", "Cache Misses", "Up For(sec)"}
 }
 
 // Returns the string representation of the Node as an array
 // Sprintf does NOT print; it only evaluates and generates string
-func (this Node) ToString() []string {
+func (this Node) ToString(subCommand string) []string {
+	if subCommand == "stats" {
+		return []string{
+			fmt.Sprintf("%s", this.HostName),
+			fmt.Sprintf("%d", this.DocumentCount),
+			fmt.Sprintf("%f", this.CPUUtilizationRate),
+			fmt.Sprintf("%d", this.FreeRAM),
+			fmt.Sprintf("%d", this.TotalRAM),
+			fmt.Sprintf("%d", this.RAMUsed),
+			fmt.Sprintf("%d", this.DiskUsedByData),
+			fmt.Sprintf("%s", this.Uptime)}
+	}
 	return []string{
 		fmt.Sprintf("%s", this.HostName),
 		fmt.Sprintf("%s", strings.Join(this.Services[:], ",")), // convert array into CSV
@@ -50,11 +63,6 @@ func (this Node) ToString() []string {
 		fmt.Sprintf("%d", this.DocumentCount),
 		fmt.Sprintf("%d", this.GetHits),
 		fmt.Sprintf("%d", this.CacheMisses),
-		fmt.Sprintf("%f", this.CPUUtilizationRate),
-		fmt.Sprintf("%d", this.FreeRAM),
-		fmt.Sprintf("%d", this.TotalRAM),
-		fmt.Sprintf("%d", this.RAMUsed),
-		fmt.Sprintf("%d", this.DiskUsedByData),
 		fmt.Sprintf("%s", this.Uptime)}
 }
 
