@@ -33,7 +33,7 @@ Above commands can also respond appropriately on usage of --verbose flag.
 
 ## Get Help about any Command
 To get help of any command
-<br /> <b> $./c2m command --help </b>
+<br /> <b> $./c2m {command} --help </b>
 <br /> or
 <br /> <b> $./c2m --help</b>
 
