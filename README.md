@@ -17,7 +17,7 @@ CLI application needs to know certain basic details before it starts spitting cl
 <br />
 <br /> You just need to provide base URL of any one node and credentials to access it (if configured)!
 <br />
-<br/> $./c2m config http://172.27.0.1:8091 Administrator Password123
+<br/> <b>$./c2m config http://172.27.0.1:8091 Administrator Password123</b>
 <br />
 <br /> <b>Note:</b> The application doesn't store the credentials in clear text!
 <br /> You should run this CLI from a host/VM which has access to Couchbase nodes/servers.
