@@ -34,9 +34,10 @@ To get help of any command
 
 
 ## Libraries/References Used
-<br />Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
+Print the output on console in tabular format: https://github.com/olekukonko/tablewriter
 <br />Important Couchbase REST End points: https://developer.couchbase.com/documentation/server/current/rest-api/rest-endpoints-all.html
 <br />CLI support: https://github.com/spf13/cobra
-<br />Monitoring Couchbase: https://blog.couchbase.com/monitoring-couchbase-cluster/ & https://blog.couchbase.com/top-10-things-ops-sys-admin-must-know-about-couchbase/
+<br />Monitoring Couchbase: https://blog.couchbase.com/monitoring-couchbase-cluster/ 
+<br />& https://blog.couchbase.com/top-10-things-ops-sys-admin-must-know-about-couchbase/
 <br />Troubleshooting Issues: https://www.youtube.com/watch?v=88NHDWz52aY
 
