@@ -30,11 +30,13 @@ type Node struct {
 	CPUUtilizationRate float64
 	SwapUsed           int
 	FreeMemory         int64
+
+	Uptime string
 }
 
 func (this Node) GetHeaders() []string {
 	return []string{"Host", "Services Running", "Status", "Cluster Membership", "# Item", "# Hits", "Cache Misses", "CPU Utiliztion",
-		"Free RAM", "Total RAM", "RAM used", "Disk Used By Data"}
+		"Free RAM", "Total RAM", "RAM used", "Disk Used By Data", "Up For(sec)"}
 }
 
 // Returns the string representation of the Node as an array
@@ -52,7 +54,8 @@ func (this Node) ToString() []string {
 		fmt.Sprintf("%d", this.FreeRAM),
 		fmt.Sprintf("%d", this.TotalRAM),
 		fmt.Sprintf("%d", this.RAMUsed),
-		fmt.Sprintf("%d", this.DiskUsedByData)}
+		fmt.Sprintf("%d", this.DiskUsedByData),
+		fmt.Sprintf("%s", this.Uptime)}
 }
 
 //Active if 'clusterMemebrship' === 'active'
