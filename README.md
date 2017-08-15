@@ -7,6 +7,7 @@
 A CLI utility to monitor Couchbase cluster. Tool helps you get key insights about your Couchbase Cluster. These details can help you to proactively monitor your cluster and take appropriate step. 
 
 ## Create Executable / Build Project
+Checkout project and run below command from the project directory.
 $go install github.com/raiskumar/c2m
 <br/> or
 <br/> $go build
