@@ -1,17 +1,21 @@
 package vo
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/raiskumar/c2m/common"
+)
 
 //https://developer.couchbase.com/documentation/server/4.5/admin/ui-intro.html
 type Cluster struct {
 	Name        string            // Name of the cluster, if any
 	NodesStatus map[string]string // maps node's ip address to the status {active, failed over, down, pending rebalance}
 
-	DiskUsedByData int   //hdd.usedByData
+	DiskUsedByData int64 //hdd.usedByData
 	FreeDisk       int64 // hdd.free
 	TotalDisk      int64 //hdd.total
 
-	RAMUsedByData int   //ram.usedByData : total RAM configured for data buckets
+	RAMUsedByData int64 //ram.usedByData : total RAM configured for data buckets
 	TotalRAM      int64 // ram.total     : total RAM or memory configured for all servers within the cluster
 	UsedRAM       int64 // ram.used
 }
@@ -22,21 +26,21 @@ type Cluster struct {
 //Servers Pending Rebalance	The number of servers that are currently waiting to be rebalanced after joining a cluster or being reactivated after failover.
 
 func (this Cluster) GetHeaders() []string {
-	return []string{"Name", "Node -> Membership Status", "RAM Total", "DATA RAM", "Used RAM", "Total Disk", "DATA DISK", "FREE DISK"}
+	return []string{"Name", "Node -> Membership Status", "Total RAM", "Data RAM", "Used RAM", "Total Disk", "Data Disk", "Free Disk"}
 }
 
 func (this Cluster) ToString() []string {
-	var status string = ""
+	var status string
 	for key, value := range this.NodesStatus {
 		status = status + key + "->" + value + "\n"
 	}
 	return []string{
 		fmt.Sprintf("%s", this.Name),
 		fmt.Sprintf("%v", status),
-		fmt.Sprintf("%d", this.TotalRAM),
-		fmt.Sprintf("%d", this.RAMUsedByData),
-		fmt.Sprintf("%d", this.UsedRAM),
-		fmt.Sprintf("%d", this.TotalDisk),
-		fmt.Sprintf("%d", this.DiskUsedByData),
-		fmt.Sprintf("%d", this.FreeDisk)}
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.TotalRAM)),
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.RAMUsedByData)),
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.UsedRAM)),
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.TotalDisk)),
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.DiskUsedByData)),
+		fmt.Sprintf("%s", common.HumanRedableMemory(this.FreeDisk))}
 }

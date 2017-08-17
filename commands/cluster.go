@@ -24,7 +24,7 @@ var clusterCmd = &cobra.Command{
 func cluster(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	//uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
+	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 
@@ -51,10 +51,10 @@ func getClusterDetails(resp vo.PoolResp) vo.Cluster {
 	cluster := vo.Cluster{
 		Name:           resp.ClusterName,
 		NodesStatus:    nodeStatus,
-		DiskUsedByData: resp.StorageTotals.Hdd.UsedByData,
+		DiskUsedByData: int64(resp.StorageTotals.Hdd.UsedByData),
 		FreeDisk:       resp.StorageTotals.Hdd.Free,
 		TotalDisk:      resp.StorageTotals.Hdd.Total,
-		RAMUsedByData:  resp.StorageTotals.RAM.UsedByData,
+		RAMUsedByData:  int64(resp.StorageTotals.RAM.UsedByData),
 		TotalRAM:       resp.StorageTotals.RAM.Total,
 		UsedRAM:        resp.StorageTotals.RAM.Used}
 	return cluster

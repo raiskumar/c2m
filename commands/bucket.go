@@ -3,6 +3,7 @@ package commands
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 
 	"github.com/olekukonko/tablewriter"
@@ -31,7 +32,7 @@ func bucket(cmd *cobra.Command, args []string) {
 		bucketName = args[0]
 	}
 	uri := NodeURL + "/pools/default/buckets"
-	//uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
+	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 
@@ -40,6 +41,7 @@ func bucket(cmd *cobra.Command, args []string) {
 
 	buckets := getBucketDetails(obj)
 	printBucketCommandOutput(buckets, bucketName)
+	metaInfo()
 }
 
 // Parse REST response and return the list of nodes struct
@@ -63,7 +65,8 @@ func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
 			DiskFetches:    resp[i].BasicStats.DiskFetches,
 			ItemCount:      resp[i].BasicStats.ItemCount,
 			EvictionPolicy: resp[i].EvictionPolicy,
-			NumVBuckets:    count}
+			NumVBuckets:    count,
+			AutoCompaction: resp[i].AutoCompactionSettings}
 		buckets = append(buckets, buckt)
 	}
 	return buckets
@@ -82,4 +85,9 @@ func printBucketCommandOutput(buckets []vo.Bucket, bucketName string) {
 		}
 	}
 	table.Render()
+}
+
+func metaInfo() {
+	fmt.Println("Note--")
+	fmt.Println("* Bucket TYPE could be MEMBASE (for Couchbase) or MEMCACHED !")
 }

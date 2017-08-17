@@ -11,6 +11,7 @@ type Bucket struct {
 	ReplicaNumber  int
 	EvictionPolicy string // "valueOnly" - evict value only from RAM if required
 	NumVBuckets    int    // number of vBuckets
+	AutoCompaction bool   // is Auto Compaction on Bucket enabled ?
 }
 
 //Get bucket stat for a node
@@ -18,7 +19,7 @@ type Bucket struct {
 // above api can even tell what all documents id are there at the node
 
 func (this Bucket) GetHeaders() []string {
-	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "Operation/Sec", "Eviction Policy", "# VBuckets"}
+	return []string{"Name", "Type", "# Item", "# Replicas", "# Disk Fetches", "Operation/Sec", "Eviction Policy", "# VBuckets", "Auto Compaction"}
 }
 
 // Returns the string representation of the bucket as an array
@@ -31,5 +32,6 @@ func (this Bucket) ToString() []string {
 		fmt.Sprintf("%d", this.DiskFetches),
 		fmt.Sprintf("%d", this.Ops),
 		fmt.Sprintf("%s", this.EvictionPolicy),
-		fmt.Sprintf("%d", this.NumVBuckets)}
+		fmt.Sprintf("%d", this.NumVBuckets),
+		fmt.Sprintf("%t", this.AutoCompaction)}
 }
