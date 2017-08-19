@@ -34,7 +34,7 @@ type Node struct {
 	FreeMemory         int64
 
 	Uptime       string
-	AutoFailover bool
+	AutoFailover string
 }
 
 func (this Node) GetHeaders(subCommand string) []string {
@@ -66,7 +66,7 @@ func (this Node) ToString(subCommand string) []string {
 		fmt.Sprintf("%d", this.DocumentCount),
 		fmt.Sprintf("%d", this.GetHits),
 		fmt.Sprintf("%d", this.CacheMisses),
-		fmt.Sprintf("%t", this.AutoFailover)}
+		fmt.Sprintf("%s", this.AutoFailover)}
 }
 
 //Active if 'clusterMemebrship' === 'active'

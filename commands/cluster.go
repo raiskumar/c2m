@@ -24,7 +24,7 @@ var clusterCmd = &cobra.Command{
 func cluster(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	//uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
+	uri = "http://mocky.io/v2/5986c32d1100009c00fcbe4a" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 

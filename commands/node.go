@@ -4,8 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-
-	"strings"
+	"strconv"
 
 	"github.com/olekukonko/tablewriter"
 	"github.com/raiskumar/c2m/common"
@@ -34,7 +33,7 @@ func node(cmd *cobra.Command, args []string) {
 	}
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	//uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
+	uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp
@@ -56,7 +55,7 @@ func node(cmd *cobra.Command, args []string) {
 func getAllNodes(resp vo.PoolResp) []vo.Node {
 	len := len(resp.Nodes)
 	var nodes []vo.Node
-	autoFailover := false
+	var autoFailover string
 	for i := 0; i < len; i++ {
 		autoFailover = isAutofailoverEnabled(resp.Nodes[i].Hostname)
 		n := vo.Node{
@@ -82,17 +81,21 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 	return nodes
 }
 
-func isAutofailoverEnabled(host string) bool {
+func isAutofailoverEnabled(host string) string {
 	uri := host + "/settings/autoFailover"
-	//uri = "http://mocky.io/v2/5995589011000037107232e7" // Test URL
+	uri = "http://mocky.io/v2/5995589011000037107232e7" // Test URL
 	contents := common.GetRestContent(uri, UserID, Password)
-	strResponse := string(contents)
-	//fmt.Println(" res =", strResponse)
-	return strings.Contains(strResponse, "true")
+	var obj vo.AutoFailovrResp
+	json.Unmarshal(contents, &obj)
+	//strResponse := string(contents)
+	if obj.Enabled == true {
+		return "Y, " + strconv.Itoa(obj.Timeout) + " sec"
+	}
+	return "N"
 }
 
 func metaInfoNode() {
 	fmt.Println("Note--")
 	fmt.Println("* Cluster Membership: active -> Node is part of cluster and taking traffic!")
-	fmt.Println("* Failover: Promotion of replicas (if there) to master !")
+	fmt.Println("* Auto Failover: Promotion of replicas to master after waiting for given time. Cluster Manager detects and determines if a data node is unavailable and then initiate a hard failover. Hard failover is the ability to drop a unavailable or unstable node quickly from the cluster. Dropping a node is achieved by promoting replica vBuckets on the remaining cluster nodes to active.")
 }

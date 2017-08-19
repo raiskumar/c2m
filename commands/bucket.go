@@ -32,7 +32,7 @@ func bucket(cmd *cobra.Command, args []string) {
 		bucketName = args[0]
 	}
 	uri := NodeURL + "/pools/default/buckets"
-	//uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
+	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 
@@ -90,4 +90,5 @@ func printBucketCommandOutput(buckets []vo.Bucket, bucketName string) {
 func metaInfo() {
 	fmt.Println("Note--")
 	fmt.Println("* Bucket TYPE could be MEMBASE (for Couchbase) or MEMCACHED !")
+	fmt.Println("* Auto-compaction settings trigger the compaction process. The process compacts databases and their respective view indexes !")
 }
