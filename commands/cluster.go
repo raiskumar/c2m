@@ -12,7 +12,7 @@ import (
 
 var clusterCmd = &cobra.Command{
 	Use:   "cluster",
-	Short: "Prints cluster details",
+	Short: "Gets cluster details",
 	Long: `Prints out details of the Couchbase Cluster
             Command format
 			$c2m command subcommand --flag=xyz

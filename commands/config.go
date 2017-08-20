@@ -11,8 +11,8 @@ import (
 
 var configCmd = &cobra.Command{
 	Use:   "config",
-	Short: "config command configures the Url and Credentials of the cluster",
-	Long: `Command which takes cluster details from user; uri, user, pass
+	Short: "Bootstraps the CLI by configuring the Url and Access Credentials!",
+	Long: `Command which takes uri, and optional user-id, password of any node
 $./c2m config <URI>
 or
 $./c2m config <URI> <USER> <PASS> `,
@@ -29,7 +29,6 @@ func config(cmd *cobra.Command, args []string) {
 	if len(args) == 3 {
 		UserID = args[1]
 		Password = args[2]
-		//os.Setenv("UserId", args[1])
 	}
 	NodeURL = args[0]
 

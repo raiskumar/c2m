@@ -15,11 +15,11 @@ import (
 // ./c2m node
 var nodeCmd = &cobra.Command{
 	Use:   "node",
-	Short: "Prints important details/metadata of nodes of the cluster!",
+	Short: "Gets important details/metadata of nodes of the cluster!",
 	Long: `Command which prints the node related details 
-            Command format
-			$./c2m node stats   # stats is optional
-            `,
+Command format:
+$./c2m node stats   # stats is optional
+`,
 	Run: node,
 }
 
@@ -33,7 +33,7 @@ func node(cmd *cobra.Command, args []string) {
 	}
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
+	//uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp
@@ -87,7 +87,6 @@ func isAutofailoverEnabled(host string) string {
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.AutoFailovrResp
 	json.Unmarshal(contents, &obj)
-	//strResponse := string(contents)
 	if obj.Enabled == true {
 		return "Y, " + strconv.Itoa(obj.Timeout) + " sec"
 	}

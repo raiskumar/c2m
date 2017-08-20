@@ -14,7 +14,7 @@ import (
 // ./c2m index
 var indexCmd = &cobra.Command{
 	Use:   "index",
-	Short: "Prints important details/metadata about indexes!",
+	Short: "Gets important details/metadata about indexes!",
 	Long: `Command which prints the Index related details 
             Command format
 			$./c2m index
