@@ -55,6 +55,7 @@ func init() {
 	RootCmd.AddCommand(bucketCmd)
 	RootCmd.AddCommand(nodeCmd)
 	RootCmd.AddCommand(indexCmd)
+	RootCmd.AddCommand(traceCmd)
 }
 
 // For debugging

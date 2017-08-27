@@ -33,7 +33,7 @@ func node(cmd *cobra.Command, args []string) {
 	}
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	//uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
+	uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp

@@ -27,7 +27,7 @@ var indexCmd = &cobra.Command{
 func index(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/indexStatus"
-	//uri = "http://www.mocky.io/v2/599141c7120000060394645b" // Test URL
+	uri = "http://www.mocky.io/v2/599141c7120000060394645b" // Test URL
 
 	restResponse := common.GetRestContent(uri, UserID, Password)
 	var obj vo.IndexResp
