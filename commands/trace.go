@@ -48,17 +48,25 @@ func trace(cmd *cobra.Command, args []string) {
 
 	v := getTraceDetails(obj, bucketName, docId, hash, vBucketNum)
 
+	documentUri := uri + "/" + v.BucketName + "/docs/" + v.DocumentID
+	documentUri = "http://www.mocky.io/v2/59a4fa281000005b0cb2ac33" // Test URL
+	document := getDocument(documentUri)
+	jsonResponse, _ := json.Marshal(document.JSON)
+	//metaResponse, _ := json.Marshal(document.Meta)
+
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader(v.GetHeaders())
 	table.Append([]string{"Bucket Name", fmt.Sprint(v.BucketName)})
 	table.Append([]string{"Document Key", v.DocumentID})
 	table.Append([]string{"(CRC) Hash of Key", fmt.Sprint(v.Hash)})
 	table.Append([]string{"vBucket which owns Document", fmt.Sprint(v.VBucketNumber)})
+	table.Append([]string{"Meta-flag", fmt.Sprint(document.Meta.Flags)})
 	table.Append([]string{"Primary Data Node", fmt.Sprint(v.PrimaryDataNode)})
 	table.Append([]string{"Replica Data Nodes", v.ReplicaDataNodes})
-	//table.Append([]string{"Document Value", v.DocumentVal})
+	table.Append([]string{"Document *", string(jsonResponse)[0:30]})
 
 	table.Render()
+	fmt.Println("*Full Document=", string(jsonResponse))
 }
 
 var crcTable *crc32.Table
@@ -115,4 +123,11 @@ func getTraceDetails(resp vo.BucketResp, bucketName, docId string, hash, vBucket
 		}
 	}
 	return response
+}
+
+func getDocument(uri string) vo.DocumentResponse {
+	doc := common.GetRestContent(uri, UserID, Password)
+	var docResponse vo.DocumentResponse
+	json.Unmarshal(doc, &docResponse)
+	return docResponse
 }
