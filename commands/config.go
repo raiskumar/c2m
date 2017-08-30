@@ -20,6 +20,7 @@ $./c2m config <URI> <USER> <PASS> `,
 }
 
 // config command
+// bootstraps this CLI application
 func config(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		fmt.Println("Node URL is mandatory!")

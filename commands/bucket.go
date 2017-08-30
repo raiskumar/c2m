@@ -1,4 +1,3 @@
-// Command - bucket
 package commands
 
 import (
@@ -12,7 +11,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ./c2m node
 var bucketCmd = &cobra.Command{
 	Use:   "bucket",
 	Short: "Gets important details/metadata about the buckets stored in couchbase cluster",
@@ -32,7 +30,7 @@ func bucket(cmd *cobra.Command, args []string) {
 		bucketName = args[0]
 	}
 	uri := NodeURL + "/pools/default/buckets"
-	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
+	//uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 
@@ -41,15 +39,15 @@ func bucket(cmd *cobra.Command, args []string) {
 
 	buckets := getBucketDetails(obj)
 	printBucketCommandOutput(buckets, bucketName)
-	metaInfo()
+	getBucketMetaInfo()
 }
 
 // Parse REST response and return the list of nodes struct
 func getBucketDetails(resp vo.BucketResp) []vo.Bucket {
-	len := len(resp) // number of buckets
+	numberOfBuckets := len(resp)
 
 	var buckets []vo.Bucket
-	for i := 0; i < len; i++ {
+	for i := 0; i < numberOfBuckets; i++ {
 		vBucketMap := resp[i].VBucketServerMap.VBucketMap
 
 		count := 0 // count of vBucket
@@ -87,7 +85,7 @@ func printBucketCommandOutput(buckets []vo.Bucket, bucketName string) {
 	table.Render()
 }
 
-func metaInfo() {
+func getBucketMetaInfo() {
 	fmt.Println("Note--")
 	fmt.Println("* Bucket TYPE could be MEMBASE (for Couchbase) or MEMCACHED !")
 	fmt.Println("* Auto-compaction settings trigger the compaction process. The process compacts databases and their respective view indexes !")

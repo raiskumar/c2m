@@ -33,7 +33,7 @@ func node(cmd *cobra.Command, args []string) {
 	}
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/pools/default"
-	uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
+	//uri = "http://mocky.io/v2/599448371100004001723034" // Test URL
 
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.PoolResp
@@ -83,7 +83,7 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 
 func isAutofailoverEnabled(host string) string {
 	uri := host + "/settings/autoFailover"
-	uri = "http://mocky.io/v2/5995589011000037107232e7" // Test URL
+	//uri = "http://mocky.io/v2/5995589011000037107232e7" // Test URL
 	contents := common.GetRestContent(uri, UserID, Password)
 	var obj vo.AutoFailovrResp
 	json.Unmarshal(contents, &obj)

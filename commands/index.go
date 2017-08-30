@@ -11,7 +11,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ./c2m index
 var indexCmd = &cobra.Command{
 	Use:   "index",
 	Short: "Gets important details/metadata about indexes!",
@@ -24,10 +23,11 @@ var indexCmd = &cobra.Command{
 
 // index command
 // http://<ip>:8091/indexStatus
+// Gets details about indexes of your cluster
 func index(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
 	uri := NodeURL + "/indexStatus"
-	uri = "http://www.mocky.io/v2/599141c7120000060394645b" // Test URL
+	//uri = "http://www.mocky.io/v2/599141c7120000060394645b" // Test URL
 
 	restResponse := common.GetRestContent(uri, UserID, Password)
 	var obj vo.IndexResp

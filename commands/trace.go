@@ -15,8 +15,9 @@ import (
 var traceCmd = &cobra.Command{
 	Use:   "trace",
 	Short: "Traces a document details with the document id",
-	Long: `Command which traces all details of the document with it's id
- Command format
+	Long: `Command which traces all details of the document in a given bucket.
+Details include - which vBucket, primary and replica data nodes host it. 
+Command format
 $./c2m trace {bucket_name} {doc_id}
 `,
 	Run: trace,
@@ -26,10 +27,10 @@ $./c2m trace {bucket_name} {doc_id}
 // http://<ip>:8091/pools/default/buckets gives bucket and node details
 func trace(cmd *cobra.Command, args []string) {
 	common.ValidateCommand(NodeURL)
-	var bucketName, docId string
+	var bucketName, docID string
 	if len(args) == 2 {
 		bucketName = args[0]
-		docId = args[1]
+		docID = args[1]
 	} else {
 		fmt.Println(" Sub-command missing !")
 		fmt.Println(" $c2m trace {bucket_name} {doc_id}")
@@ -38,7 +39,7 @@ func trace(cmd *cobra.Command, args []string) {
 	uri := NodeURL + "/pools/default/buckets"
 	uri = "http://www.mocky.io/v2/598aa61d410000d51d8211bf" // Test URL
 
-	hash, vBucketNum := getVBucketNumber(docId)
+	hash, vBucketNum := getVBucketNumber(docID)
 	fmt.Println(bucketName, uri, vBucketNum)
 
 	contents := common.GetRestContent(uri, UserID, Password)
@@ -46,27 +47,26 @@ func trace(cmd *cobra.Command, args []string) {
 	var obj vo.BucketResp
 	json.Unmarshal(contents, &obj)
 
-	v := getTraceDetails(obj, bucketName, docId, hash, vBucketNum)
+	v := getTraceDetails(obj, bucketName, docID, hash, vBucketNum)
 
 	documentUri := uri + "/" + v.BucketName + "/docs/" + v.DocumentID
 	documentUri = "http://www.mocky.io/v2/59a4fa281000005b0cb2ac33" // Test URL
-	document := getDocument(documentUri)
+	document := getDocumentContent(documentUri)
 	jsonResponse, _ := json.Marshal(document.JSON)
-	//metaResponse, _ := json.Marshal(document.Meta)
 
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader(v.GetHeaders())
-	table.Append([]string{"Bucket Name", fmt.Sprint(v.BucketName)})
-	table.Append([]string{"Document Key", v.DocumentID})
-	table.Append([]string{"(CRC) Hash of Key", fmt.Sprint(v.Hash)})
-	table.Append([]string{"vBucket which owns Document", fmt.Sprint(v.VBucketNumber)})
-	table.Append([]string{"Meta-flag", fmt.Sprint(document.Meta.Flags)})
-	table.Append([]string{"Primary Data Node", fmt.Sprint(v.PrimaryDataNode)})
-	table.Append([]string{"Replica Data Nodes", v.ReplicaDataNodes})
-	table.Append([]string{"Document *", string(jsonResponse)[0:30]})
+	//table.Append([]string{"Bucket Name", fmt.Sprintf("%s", v.BucketName)})
+	table.Append([]string{"Document Key", fmt.Sprintf("%s", v.DocumentID)})
+	table.Append([]string{"(CRC) Hash of Key", fmt.Sprintf("%d", v.Hash)})
+	table.Append([]string{"vBucket which owns Document", fmt.Sprintf("%d", v.VBucketNumber)})
+	//table.Append([]string{"Meta-flag", fmt.Sprintf("%d", document.Meta.Flags)})
+	table.Append([]string{"Primary Data Node", fmt.Sprintf("%s", v.PrimaryDataNode)})
+	table.Append([]string{"Replica Data Nodes", fmt.Sprintf("%s", v.ReplicaDataNodes)})
+	//table.Append([]string{"Document *", string(jsonResponse)[0:30]})
 
 	table.Render()
-	fmt.Println("*Full Document=", string(jsonResponse))
+	fmt.Println("Document: \n", string(jsonResponse))
 }
 
 var crcTable *crc32.Table
@@ -91,9 +91,8 @@ func getVBucketNumber(dockID string) (uint32, uint32) {
 }
 
 //https://forums.couchbase.com/t/connect-to-a-specific-server-node/7928/2
-
 // Parse REST response and return the list of nodes struct
-func getTraceDetails(resp vo.BucketResp, bucketName, docId string, hash, vBucketNum uint32) vo.Trace {
+func getTraceDetails(resp vo.BucketResp, bucketName, docID string, hash, vBucketNum uint32) vo.Trace {
 	len := len(resp) // number of buckets
 	var response vo.Trace
 	for i := 0; i < len; i++ {
@@ -114,7 +113,7 @@ func getTraceDetails(resp vo.BucketResp, bucketName, docId string, hash, vBucket
 			}
 			response = vo.Trace{
 				BucketName:       bucketName,
-				DocumentID:       docId,
+				DocumentID:       docID,
 				Hash:             hash,
 				DocumentVal:      "",
 				VBucketNumber:    vBucketNum,
@@ -125,7 +124,7 @@ func getTraceDetails(resp vo.BucketResp, bucketName, docId string, hash, vBucket
 	return response
 }
 
-func getDocument(uri string) vo.DocumentResponse {
+func getDocumentContent(uri string) vo.DocumentResponse {
 	doc := common.GetRestContent(uri, UserID, Password)
 	var docResponse vo.DocumentResponse
 	json.Unmarshal(doc, &docResponse)
