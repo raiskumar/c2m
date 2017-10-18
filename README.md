@@ -6,10 +6,8 @@
 
 A CLI utility to monitor Couchbase cluster. Tool helps you get key insights about your Couchbase Cluster. These details can help you to proactively monitor your cluster and take appropriate step. 
 
-## Download latest release on your Unix/Linux host or VM
-<code>
-$curl -LOk `curl --silent https://api.github.com/repos/raiskumar/c2m/releases/latest | /usr/bin/awk '/browser_download_url/ { print $2 }' | /usr/bin/sed 's/"//g'`
-</code>
+## Download latest release
+$curl -LOk ``curl --silent https://api.github.com/repos/raiskumar/c2m/releases/latest | /usr/bin/awk '/browser_download_url/ { print $2 }' | /usr/bin/sed 's/"//g'``
 
 ## Create Executable / Build Project
 Checkout project and run below command from the project directory.
