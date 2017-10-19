@@ -15,7 +15,9 @@ var configCmd = &cobra.Command{
 	Long: `Command which takes uri, and optional user-id, password of any node
 $./c2m config <URI>
 or
-$./c2m config <URI> <USER> <PASS> `,
+$./c2m config <URI> <USER> <PASS> 
+
+URI Format: http://172.27.0.2:8091  (i.e. complete url)`,
 	Run: config,
 }
 
