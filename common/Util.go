@@ -2,6 +2,7 @@ package common
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 	"strconv"
 )
@@ -11,6 +12,11 @@ func ValidateCommand(NodeURL string) {
 		fmt.Println("Please configure Your Cluster !")
 		fmt.Println("Run config command; for help $./c2m config --help")
 		os.Exit(1)
+	}
+
+	_, err := url.ParseRequestURI(NodeURL) //https://stackoverflow.com/questions/31480710/validate-url-with-standard-package-in-go
+	if err != nil {
+		panic(err)
 	}
 }
 
