@@ -6,6 +6,8 @@ import (
 	"os"
 	"strconv"
 
+	"strings"
+
 	"github.com/olekukonko/tablewriter"
 	"github.com/raiskumar/c2m/common"
 	"github.com/raiskumar/c2m/vo"
@@ -83,8 +85,14 @@ func getAllNodes(resp vo.PoolResp) []vo.Node {
 
 func isAutofailoverEnabled(host string) string {
 	uri := host + "/settings/autoFailover"
+
+	if !strings.Contains(uri, "http") {
+		uri = "http://" + uri // if url doesn't start with http
+	}
+
 	//uri = "http://mocky.io/v2/5995589011000037107232e7" // Test URL
 	contents := common.GetRestContent(uri, UserID, Password)
+	//fmt.Println(uri + "-------" + string(contents))
 	var obj vo.AutoFailovrResp
 	json.Unmarshal(contents, &obj)
 	if obj.Enabled == true {
